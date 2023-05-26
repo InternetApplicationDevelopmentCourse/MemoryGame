@@ -1,0 +1,11 @@
+
+
+
+
+
+/*
+Add this tag when you need to hide elements from the screen.
+*/
+.display-none{
+    display:none;
+}
