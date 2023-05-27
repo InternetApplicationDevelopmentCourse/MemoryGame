@@ -74,3 +74,30 @@ function removeMenu(){
 function launchFirework(){
 
 }
+
+let chosenCards = []
+let score = 0
+$("#score").text(score);
+
+function revealCard(element) {
+    if(chosenCards.length < 2 && !element.classList.contains("flipped")){
+        element.classList.add("flipped");
+        chosenCards.push(element);
+        console.log(chosenCards);
+        if(chosenCards.length == 2){
+            setTimeout(checkMatch, 1000)
+        }       
+    }
+}
+
+function checkMatch() {
+    if(chosenCards[0].getAttribute("attr_id") == chosenCards[1].getAttribute("attr_id")) {
+        score += 1;
+        $("#score").text(score);
+    }else {
+        chosenCards[0].classList.remove("flipped");
+        chosenCards[1].classList.remove("flipped");
+    }
+
+    chosenCards = [];
+}
