@@ -1,5 +1,5 @@
-
-
+let chosen_cards = [];
+let score = 0;
 
 
 /**
@@ -73,4 +73,29 @@ function removeMenu(){
 
 function launchFirework(){
 
+}
+
+
+
+function revealCard(element){
+    if(chosen_cards.length < 2 && !element.classList.contains("flipped")){
+        element.classList.add("flipped");
+        chosen_cards.push(element);
+        if(chosen_cards.length === 2){
+            setTimeout(checkMatch, 1000);
+        }
+        console.log(`revealCard chosen card is: ${chosen_cards.length} cards`);
+    }
+}
+
+function checkMatch(){
+    const result = chosen_cards[0].getAttribute("attr_id") === chosen_cards[1].getAttribute("attr_id");
+    if(result){
+        score++;
+    }
+    else{
+        chosen_cards[0].classList.remove("flipped");
+        chosen_cards[1].classList.remove("flipped");
+    }
+    chosen_cards = [];
 }
