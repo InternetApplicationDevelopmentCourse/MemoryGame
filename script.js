@@ -9,20 +9,20 @@
  * Initiate the timer.
  * Link function to 'Play' button.
  */
-function startGame(){
-    /**
-     * Add check if player name is left empty or card pairs number is not chosen.
-     * only if both received, allow the rest of the function.
-     */
-    const player_name = document.querySelector(".player-name");
-    const card_pairs = document.querySelector(".card-pairs");
-    localStorage.setItem("player_name", player_name);
-    localStorage.setItem("card_pairs", card_pairs)
+// function startGame(){
+//     /**
+//      * Add check if player name is left empty or card pairs number is not chosen.
+//      * only if both received, allow the rest of the function.
+//      */
+//     const player_name = document.querySelector(".player-name");
+//     const card_pairs = document.querySelector(".card-pairs");
+//     localStorage.setItem("player_name", player_name);
+//     localStorage.setItem("card_pairs", card_pairs)
 
-    removeMenu();
-    buildGameBoard();
-    startTimer();
-}
+//     removeMenu();
+//     buildGameBoard();
+//     startTimer();
+// }
 
 /**
  * Initiates the game counter.
@@ -77,26 +77,73 @@ function launchFirework(){
 
 let chosenCards = []
 let score = 0
-$("#score").text(score);
 
-function revealCard(element) {
-    if(chosenCards.length < 2 && !element.classList.contains("flipped")){
-        element.classList.add("flipped");
-        chosenCards.push(element);
-        console.log(chosenCards);
-        if(chosenCards.length == 2){
-            setTimeout(checkMatch, 1000)
-        }       
+// function revealCard(element) {
+//     if(chosenCards.length < 2 && !element.classList.contains("flipped")){
+//         element.classList.add("flipped");
+//         chosenCards.push(element);
+//         checkMatch();
+//     }
+    
+// }
+
+
+
+
+// $("#game-section").hide();
+$("#menu").hide();
+
+const startGame = ()=> {
+    // event.preventDefault();
+    const player_name = $("#name").val();
+    const card_pairs = $("#difficulty").val();
+}
+
+const onLoad = () => {
+    // $("#game-section").hide();
+    // $("#menu").show();
+    $("#menu").hide();
+    $("#game-section").show();
+
+    $(".card").flip();
+    $(".card").flip();
+}
+
+const flipCard = (element)=> {
+    if(chosenCards.length < 2 && !$(element).hasClass("flipped")){
+        revealCard(element);
+    }else {
+        hideCard(element);
     }
 }
 
+const revealCard = (element)=> {
+    console.log($(element).hasClass("flipped") , chosenCards.length);
+    if(chosenCards.length < 2 && !$(element).hasClass("flipped")){
+        console.log(element);
+        $(element).flip();
+        $(element).addClass("flipped");
+        chosenCards.push(element);
+        if(chosenCards.length == 2){
+            setTimeout(checkMatch, 1000);
+        }
+    }
+}
+
+const hideCards = ()=> {
+    console.log("hide cards");
+    chosenCards.forEach(element => {
+        $(element).flip(false);
+        $(element).removeClass("flipped");
+    });
+    chosenCards = [];
+}
+
 function checkMatch() {
-    if(chosenCards[0].getAttribute("attr_id") == chosenCards[1].getAttribute("attr_id")) {
+    if($(chosenCards[0]).attr("attr_id") === $(chosenCards[1]).attr("attr_id")) {
         score += 1;
-        $("#score").text(score);
     }else {
-        chosenCards[0].classList.remove("flipped");
-        chosenCards[1].classList.remove("flipped");
+        hideCards();
     }
 
     chosenCards = [];
