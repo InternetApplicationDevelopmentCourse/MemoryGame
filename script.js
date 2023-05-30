@@ -1,3 +1,8 @@
+/* 
+Tal Mekler, 318811122
+Lior Hassin, 318231792
+*/
+
 const images = [
     "/card images/image1.jpg",
     "/card images/image2.jpg",
@@ -33,16 +38,49 @@ const images = [
 ]
 let chosenCards = []
 let score = 0
+let seconds = 0
+let minutes = 0
+let m;
+let s;
+let maxScore;
 
 const startGame = ()=> {
     event.preventDefault();
     const player_name = $("#name").val();
     const card_pairs = $("#difficulty").val();
-
+    maxScore = card_pairs
+    console.log(player_name);
     //functions to implement for game functionallity:
     initializeCards(card_pairs);
     $(".card").flip(); //initialize flip parameters for each card.
     startTimer();
+
+    $("#player-name").text(player_name)
+    $("#player-score").text(score)
+
+    setInterval(() => {
+        if(seconds < 60) {
+            seconds++
+        }else {
+            seconds = 0
+            minutes++
+        }
+        if(seconds < 10){
+            s = `0${seconds}`
+        }else {
+            s = seconds
+        }
+
+        if(minutes < 10) {
+            m = `0${minutes}`
+        }else{
+            m=minutes
+        }
+
+        $("#seconds").text(s)
+        $("#minutes").text(m)
+
+    }, 1000);
 
     $("#menu-section").hide();
     $("#game-section").show();
@@ -120,6 +158,7 @@ function checkMatch() {
 
     if(firstCard == secondCard) {
         score += 1;
+        $("#player-score").text(score)
     }else {
         chosenCards.forEach(element => {
             $(element).flip(false);
@@ -128,4 +167,9 @@ function checkMatch() {
     }
 
     chosenCards = [];
+    if(score == maxScore) {
+        $("#modal-minutes").text(m)
+        $("#modal-seconds").text(s)
+        $("#open-modal-btn").click()
+    }
 }
