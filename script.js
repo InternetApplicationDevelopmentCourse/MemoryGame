@@ -1,126 +1,108 @@
-
-
-
-
-/**
- * Saves player name and chosen pairs in localStorage.
- * Hides menu screen and launches the game:
- *          Build all page elements (Timer, Name, Button(ResetGame), Container(for cards))
- * Initiate the timer.
- * Link function to 'Play' button.
- */
-// function startGame(){
-//     /**
-//      * Add check if player name is left empty or card pairs number is not chosen.
-//      * only if both received, allow the rest of the function.
-//      */
-//     const player_name = document.querySelector(".player-name");
-//     const card_pairs = document.querySelector(".card-pairs");
-//     localStorage.setItem("player_name", player_name);
-//     localStorage.setItem("card_pairs", card_pairs)
-
-//     removeMenu();
-//     buildGameBoard();
-//     startTimer();
-// }
-
-/**
- * Initiates the game counter.
- */
-function startTimer(){
-
-}
-
-function buildGameBoard(){
-    /**
-     * Builds main container with 1 div as a row inside.
-     */
-    initiateCards();
-}
-
-function initiateCards(){
-
-}
-
-function createCard(){
-    container = document.querySelector(".row");
-    const newDiv = document.createElement("div");
-    newDiv.classList.add("col-6");
-    newDiv.classList.add("col-sm-3");
-    newDiv.classList.add("col-md-2");
-    newDiv.classList.add("col-lg-1");
-    newDiv.innerHTML = `<div class="card" style="width: 18rem;">
-    <img src="${image}" class="card-img">
-    </div>`
-    container.appendChild(newDiv);
-}
-
-function buildMenu(){
-    /**
-     * Removes game-screen
-     * Add menu screen
-     * Design:
-     * <section class="menu-screen">...innerHTML...<section>
-     */
-    const game_screen = document.querySelector(".game-screen");
-    document.removeChild(game_screen);
-}
-
-function removeMenu(){
-    const menu_screen = document.querySelector(".menu-screen");
-    document.removeChild(menu_screen);
-}
-
-function launchFirework(){
-
-}
-
+const images = [
+    "/card images/image1.jpg",
+    "/card images/image2.jpg",
+    "/card images/image3.jpg",
+    "/card images/image4.jpg",
+    "/card images/image5.jpg",
+    "/card images/image6.jpg",
+    "/card images/image7.jpg",
+    "/card images/image8.jpg",
+    "/card images/image9.jpg",
+    "/card images/image10.jpg",
+    "/card images/image11.jpg",
+    "/card images/image12.jpg",
+    "/card images/image13.jpg",
+    "/card images/image14.jpg",
+    "/card images/image15.jpg",
+    "/card images/image16.jpg",
+    "/card images/image17.jpg",
+    "/card images/image18.jpg",
+    "/card images/image19.jpg",
+    "/card images/image20.jpg",
+    "/card images/image21.jpg",
+    "/card images/image22.jpg",
+    "/card images/image23.jpg",
+    "/card images/image24.jpg",
+    "/card images/image25.jpg",
+    "/card images/image26.jpg",
+    "/card images/image27.jpg",
+    "/card images/image28.jpg",
+    "/card images/image29.jpg",
+    "/card images/image30.jpg",
+    "/card images/image31.jpg"
+]
 let chosenCards = []
 let score = 0
-
-// function revealCard(element) {
-//     if(chosenCards.length < 2 && !element.classList.contains("flipped")){
-//         element.classList.add("flipped");
-//         chosenCards.push(element);
-//         checkMatch();
-//     }
-    
-// }
-
-
-
-
-// $("#game-section").hide();
-$("#menu").hide();
 
 const startGame = ()=> {
     // event.preventDefault();
     const player_name = $("#name").val();
     const card_pairs = $("#difficulty").val();
-}
 
-const onLoad = () => {
-    // $("#game-section").hide();
-    // $("#menu").show();
-    $("#menu").hide();
+    //functions to implement for game functionallity:
+    initializeCards(card_pairs);
+    $(".card").flip(); //initialize flip parameters for each card.
+    startTimer();
+
+    $("#menu-section").hide();
     $("#game-section").show();
-
-    $(".card").flip();
-    $(".card").flip();
 }
 
-const flipCard = (element)=> {
-    if(chosenCards.length < 2 && !$(element).hasClass("flipped")){
-        revealCard(element);
-    }else {
-        hideCard(element);
+function initializeCards(card_pairs){
+    let generatedImages = generateImages(card_pairs);
+    for(let i = 0; i < card_pairs * 2; i++){
+        let randomNumber = Math.floor(Math.random()*generatedImages.length);
+        createCard(generatedImages.splice(randomNumber,1));
     }
 }
 
+function generateImages(card_pairs){
+    let generatedImages = new Array();
+    let alreadyTaken = new Set();
+
+    //Choose random pictures from images array.
+    while(alreadyTaken.size < card_pairs){
+        let randomNumber = Math.floor(Math.random()*30);
+        if(!alreadyTaken.has(randomNumber)){
+            alreadyTaken.add(randomNumber);
+            generatedImages.push(images[randomNumber]);
+            generatedImages.push(images[randomNumber]);
+        }
+    }
+    return generatedImages;
+}
+
+function createCard(image){
+    container = document.querySelector(".row");
+    const newDiv = document.createElement("div");
+    newDiv.classList.add("col-4");
+    newDiv.classList.add("col-sm-3");
+    newDiv.classList.add("col-xl-2");
+    newDiv.classList.add("col-xxl-1");
+    newDiv.innerHTML = 
+    `<div class="card bg-transparent" onclick="revealCard(this)">
+        <div class="front position-absolute">
+            <img class="w-100 h-100" src="CardBack.png" alt="Fail to load cardBack img">
+        </div>
+        <div class="back">
+            <img class="w-100 h-100" src="${image}" alt="Fail to load hasbulla img">
+        </div>  
+    </div>`
+    newDiv.setAttribute("image-src", image);
+    //Later change, set attribute by image name/number instead of default to 1.
+    container.appendChild(newDiv);
+}
+
+function launchFirework(){
+    //Not implemented yet
+}
+
+function startTimer(){
+    //Not implemented yet
+}
+
 const revealCard = (element)=> {
-    console.log($(element).hasClass("flipped") , chosenCards.length);
     if(chosenCards.length < 2 && !$(element).hasClass("flipped")){
-        console.log(element);
         $(element).flip();
         $(element).addClass("flipped");
         chosenCards.push(element);
@@ -128,22 +110,19 @@ const revealCard = (element)=> {
             setTimeout(checkMatch, 1000);
         }
     }
-}
-
-const hideCards = ()=> {
-    console.log("hide cards");
-    chosenCards.forEach(element => {
+    else{
         $(element).flip(false);
-        $(element).removeClass("flipped");
-    });
-    chosenCards = [];
+    }
 }
 
 function checkMatch() {
-    if($(chosenCards[0]).attr("attr_id") === $(chosenCards[1]).attr("attr_id")) {
+    if($(chosenCards[0]).attr("image-src") === $(chosenCards[1]).attr("image-src")) {
         score += 1;
     }else {
-        hideCards();
+        chosenCards.forEach(element => {
+            $(element).flip(false);
+            $(element).removeClass("flipped");
+        });
     }
 
     chosenCards = [];

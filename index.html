@@ -9,20 +9,23 @@
 
   <title>Document</title>
 </head>
-<body class="bg-dark container align-content-center justify-content-center" onload="onLoad()">
+<body class="bg-dark container align-content-center justify-content-center">
   <h1 class="text-light text-center mt-5">Memory Game</h1>
-  <section id="menu" class="w-50 align-self-center mx-auto">
+  <section id="menu-section" class="w-50 align-self-center mx-auto">
     <form>
       <div class="form-group mb-3">
         <label for="name" class="text-light">Name</label>
         <input type="text" class="form-control" id="name" placeholder="Enter your name">
       </div>
       <div class="form-group mb-4">
-        <label for="difficulty" class="text-light">Difficulty</label>
+        <label for="difficulty" class="text-light">How many pairs?</label>
         <select class="form-control" id="difficulty">
-          <option value="5">Easy (5)</option>
-          <option value="10">Medium (10)</option>
-          <option value="15">Hard (15)</option>
+          <option value="5">5</option>
+          <option value="10">10</option>
+          <option value="15">15</option>
+          <option value="20">20</option>
+          <option value="25">25</option>
+          <option value="30">30</option>
         </select>
       </div>
       <div class="btn btn-primary w-100" onclick="startGame()">Start</div>
@@ -32,62 +35,6 @@
   <section id="game-section" class="text-light">
     <div class="container">
       <div class="row justify-content-around">
-
-        <div class="col-8 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 justify-content-center">
-          <div attr_id="1" class="card bg-transparent" onclick="flipCard(this)">
-            <div class="front bg-danger position-absolute w-100 h-100">
-                Front
-            </div>
-            <div class="back bg-info w-100 h-100">
-                Back
-            </div>  
-          </div>
-        </div><div class="col-8 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 justify-content-center">
-          <div attr_id="1" class="card bg-transparent" onclick="flipCard(this)">
-            <div class="front bg-danger position-absolute w-100 h-100">
-                Front
-            </div>
-            <div class="back bg-info w-100 h-100">
-                Back
-            </div>  
-          </div>
-        </div><div class="col-8 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 justify-content-center">
-          <div attr_id="1" class="card bg-transparent" onclick="flipCard(this)">
-            <div class="front bg-danger position-absolute w-100 h-100">
-                Front
-            </div>
-            <div class="back bg-info w-100 h-100">
-                Back
-            </div>  
-          </div>
-        </div><div class="col-8 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 justify-content-center">
-          <div attr_id="1" class="card bg-transparent" onclick="flipCard(this)">
-            <div class="front bg-danger position-absolute w-100 h-100">
-                Front
-            </div>
-            <div class="back bg-info w-100 h-100">
-                Back
-            </div>  
-          </div>
-        </div><div class="col-8 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 justify-content-center">
-          <div attr_id="1" class="card bg-transparent" onclick="flipCard(this)">
-            <div class="front bg-danger position-absolute w-100 h-100">
-                Front
-            </div>
-            <div class="back bg-info w-100 h-100">
-                Back
-            </div>  
-          </div>
-        </div><div class="col-8 col-sm-6 col-md-4 col-lg-3 col-xl-2 col-xxl-1 justify-content-center">
-          <div attr_id="1" class="card bg-transparent" onclick="flipCard(this)">
-            <div class="front bg-danger position-absolute w-100 h-100">
-                Front
-            </div>
-            <div class="back bg-info w-100 h-100">
-                Back
-            </div>  
-          </div>
-        </div>
 
       </div>
     </div>
