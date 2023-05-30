@@ -85,7 +85,7 @@ function createCard(image){
             <img class="w-100 h-100" src="CardBack.png" alt="Fail to load cardBack img">
         </div>
         <div class="back">
-            <img class="w-100 h-100" src="${image}" alt="Fail to load hasbulla img">
+            <img class="w-100 h-100 rounded-1" src="${image}" alt="Fail to load hasbulla img">
         </div>  
     </div>`
     newDiv.setAttribute("image-src", image);
@@ -116,7 +116,10 @@ const revealCard = (element)=> {
 }
 
 function checkMatch() {
-    if($(chosenCards[0]).attr("image-src") === $(chosenCards[1]).attr("image-src")) {
+    const firstCard = $(chosenCards[0]).children(".back").children().attr("src");
+    const secondCard = $(chosenCards[1]).children(".back").children().attr("src");
+
+    if(firstCard == secondCard) {
         score += 1;
     }else {
         chosenCards.forEach(element => {
