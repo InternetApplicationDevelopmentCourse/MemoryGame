@@ -35,7 +35,7 @@ let chosenCards = []
 let score = 0
 
 const startGame = ()=> {
-    // event.preventDefault();
+    event.preventDefault();
     const player_name = $("#name").val();
     const card_pairs = $("#difficulty").val();
 
