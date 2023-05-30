@@ -78,7 +78,6 @@ function createCard(image){
     newDiv.classList.add("col-4");
     newDiv.classList.add("col-sm-3");
     newDiv.classList.add("col-xl-2");
-    newDiv.classList.add("col-xxl-1");
     newDiv.innerHTML = 
     `<div class="card bg-transparent" onclick="revealCard(this)">
         <div class="front position-absolute">
